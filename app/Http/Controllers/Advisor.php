@@ -22,7 +22,8 @@ class advisor extends Controller
     public function create()
     {
         $data = $this->alll();
-        return view('formadvisor',compact('data'));
+        return view('admin.formadvisor',compact('data'));
+        
         
     }
 
@@ -37,9 +38,15 @@ class advisor extends Controller
             'password'=>'required',
             'roles'=>'required'
         ]);
+        if($request->password != $request->password1)
+        {
+            echo "password not same;";
+            return;
+        }
         User::create($data);
         $data = $this->alll();
-        return view('formadvisor',compact('data'));
+        return redirect()->back();  
+        //return view('admin.formadvisor',compact('data'));
     }
     public function alll()
     {

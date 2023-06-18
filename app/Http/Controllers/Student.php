@@ -23,7 +23,7 @@ class student extends Controller
     public function create()
     {
         $data = $this->alll();
-        return view('form',compact('data'));
+        return view('admin.form',compact('data'));
     }
     /**
      * Store a newly created resource in storage.
@@ -36,9 +36,14 @@ class student extends Controller
             'password'=>'required',
             'roles'=>'required'
         ]);
+        if($request->password != $request->password1)
+        {
+            echo "password not same;";
+            return;
+        }
         User::create($data);
         $data = $this->alll();
-        return view('form',compact('data'));
+        return redirect()->back();
     }
     public function alll()
     {

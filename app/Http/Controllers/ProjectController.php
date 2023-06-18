@@ -13,7 +13,7 @@ class ProjectController extends Controller
     public function index()
     {
         $data = Project::all()->where('status','=','awaiting');
-        return view('projects',compact('data'));
+        return view('admin.projects',compact('data'));
     }
 
     /**
