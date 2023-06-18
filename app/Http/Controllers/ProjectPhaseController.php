@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Project;
+use App\Models\ProjectPhase;
 use Illuminate\Http\Request;
 
-class ProjectController extends Controller
+class ProjectPhaseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,27 +15,14 @@ class ProjectController extends Controller
         //
     }
 
-    public function showPhaseData($projectId)
-    {
-        $project = Project::with('phases.phaseData')->find($projectId);
-
-        // Pass the $project to the view
-    }
-
-    public function showPhase($projectId)
-    {
-        $project = Project::with('phases')->find($projectId);
-
-        // Pass the $project to the view
-    }
-
     /**
      * Show the form for creating a new resource.
      */
-    // public function create(Project $project)
-    // {
-    //     return view('student.project.upload', compact('project'));
-    // }
+    public function create($projectId)
+    {
+        $phases = ProjectPhase::where('project_id', $projectId)->get();
+        return view('student.project.upload', compact('phases'));
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -48,7 +35,7 @@ class ProjectController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Project $project)
+    public function show(ProjectPhase $projectPhase)
     {
         //
     }
@@ -56,7 +43,7 @@ class ProjectController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Project $project)
+    public function edit(ProjectPhase $projectPhase)
     {
         //
     }
@@ -64,7 +51,7 @@ class ProjectController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Project $project)
+    public function update(Request $request, ProjectPhase $projectPhase)
     {
         //
     }
@@ -72,7 +59,7 @@ class ProjectController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Project $project)
+    public function destroy(ProjectPhase $projectPhase)
     {
         //
     }
