@@ -22,11 +22,12 @@ class CheckRole
         }
         else if((Auth::check() && Auth::user()->roles == "student") )
         {
-            return response()->view('dashboard1');
+            
+            return $next($request);
         }
         else
         {
-            return response()->view('dashboard1');
+            return $next($request);
         }
         
     }
