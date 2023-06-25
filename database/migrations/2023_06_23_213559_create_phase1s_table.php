@@ -11,14 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('project_applications', function (Blueprint $table) {
+        Schema::create('phase1s', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->unsignedBigInteger("sid"); // Use unsignedBigInteger for foreign keys
+            $table->foreign('sid')->references('id')->on('users');
             $table->string('description');
             $table->string('document');
-            $table->string("status")->default('awaiting');
             $table->timestamps();
-
         });
     }
 
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('project_applications');
+        Schema::dropIfExists('phase1s');
     }
 };

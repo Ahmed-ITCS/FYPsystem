@@ -12,8 +12,6 @@
             <a href="{{ route('student.complaint.submit') }}" class="btn btn-primary">Submit Complaint</a>
             <a href="{{ route('student.project.upload', 1) }}" class="btn btn-primary">Upload Project Document</a>
             <a href="/studentphase1" class="btn btn-primary">phase1</a>
-            <a href="/studentphase2" class="btn btn-primary">phase2</a>
-            <a href="/studentphase3" class="btn btn-primary">phase3</a>
              <!-- Authentication -->
              <form method="POST" action="{{ route('logout') }}">
                     @csrf
@@ -29,3 +27,11 @@
         <!-- Add any additional sections or information as needed -->
     </div>
 @endsection
+<form action="phase1save" method="post" enctype='multipart/form-data'>
+    @csrf
+    <label>Description </label>
+    <input type="text" name="description" /><br />
+    <label>Document </label>
+    <input type="file" name="file" /><br />
+    <input type="submit" value="Submit" />
+</form>

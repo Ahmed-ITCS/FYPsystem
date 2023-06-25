@@ -1,3 +1,4 @@
+<!-- resources/views/student/complaints/create.blade.php -->
 <!doctype html>
 <html lang="en">
   <head>
@@ -10,6 +11,10 @@
 <style>
 .navv{
     display: flex;
+    
+}
+table, th, td {
+  border: 1px solid black;
 }
 </style>
 <body>
@@ -50,74 +55,45 @@
                         {{ __('Log Out') }}
                     </x-responsive-nav-link>
                 </form>
-                </div>            
+                </div>
+                 
+                
+                
+
+                
             </body>
             </html>
-    <h1>Make Advisor</h1>
-    <form action="addadvisorsave" method ="POST">
-        @csrf
-        <table>
-            <tr>
-                <td><label>Name: </label></td>
-                <td><input type ="name" placeholder="Ahmed" name="name"/></td>
-            </tr>
-            <tr>
-                <td><label>Email: </label></td>
-                <td><input type ="email" placeholder="Ahmed@whatever.com" name="email"/></td>
-            </tr>
-            <tr>
-                <td><label>Password: </label></td>
-                <td><input type ="password" placeholder="********" name="password"/></td>
-            </tr>
-            <tr>
-                <td><label>Confirm Password: </label></td>
-                <td><input type ="password" placeholder="********" name="password1"/></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>
-                    <select name="roles">
-                    <option value="advsior">Advisor</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>
-                    <input type="submit" value="Make User"/>
-                </td>
-            </tr>
-            
-        </table>
-    </form>
-    <h1>Advisor</h1>
-    <table>
-        <tr>
-            <th>Name</th>
-            <th></th>
-            <th>Email</th>
-            <th></th>
-            <th>Roles</th>
-        </tr>
-    <?php
-    ?>
-    <tr>
-    <?php
-    foreach($data as $d)
-    {
-        ?>
-        <td>{{$d->name}}</td>
-        <td></td>
-        <td>{{$d->email}}</td>
-        <td></td>
-        <td>{{$d->roles}}</td>
-        <td><button><a href="deleteadvisor/{{$d->id}}">Delete</a></button></td>
-        </tr>
-        <?php
 
-    }
+@extends('layout.app')
 
-    ?>
-    </table>
-</body>
-</html>
+@section('content')
+    <div class="complaint-create-container">
+
+        <button><a href="Complains">Complains</a></button>
+        <h1>Submit a Complaint</h1>
+        <form method="POST" action="{{ route('student.complaints.store') }}">
+            @csrf
+            <div class="form-group">
+                <label for="subject">You are complaining as </label>
+                <select name = "AS">
+
+                  <option>   </option>
+                  <option value="Admin">Admin</option>
+                  <option value="Student">Student</option>
+                  <option value="Supervisor">Supervisor</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="subject">Subject</label>
+                <input type="text" name="subject" id="subject" required>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Complain</label>
+                <textarea name="description" id="description" rows="5" required></textarea>
+            </div>
+
+            <button type="submit">Submit Complaint</button>
+        </form>
+    </div>
+@endsection

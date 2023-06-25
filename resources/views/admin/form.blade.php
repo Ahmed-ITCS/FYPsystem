@@ -27,7 +27,13 @@
     <a class="nav-link" href="addadvisor">Add Advisor</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link " href="Projects">Projects</a>
+    <a class="nav-link "href="Projects">Projects</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link "href="complaint">Complaints</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link "href="Proposals">Proposals</a>
   </li>
 </ul>
                 <x-responsive-nav-link :href="route('profile.edit')">

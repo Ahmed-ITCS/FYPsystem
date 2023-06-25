@@ -10,6 +10,10 @@
 <style>
 .navv{
     display: flex;
+    
+}
+table, th, td {
+  border: 1px solid black;
 }
 </style>
 <body>
@@ -21,7 +25,7 @@
     <a class="nav-link active" aria-current="page" href="dashboard">Home</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="addstudent">Submit project</a>
+    <a class="nav-link" href="addstudent">Add Student</a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="addadvisor">Add Advisor</a>
@@ -29,6 +33,13 @@
   <li class="nav-item">
     <a class="nav-link "href="Projects">Projects</a>
   </li>
+  <li class="nav-item">
+    <a class="nav-link "href="complaint">Complaints</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link "href="Proposals">Proposals</a>
+  </li>
+  
 </ul>
                 <x-responsive-nav-link :href="route('profile.edit')">
                     {{ __('Profile') }}
@@ -44,6 +55,32 @@
                         {{ __('Log Out') }}
                     </x-responsive-nav-link>
                 </form>
-                </div>            
+                </div>
+                <table border='2'>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                    <th>Proposal</th>
+                  </tr>
+                @foreach ($data as $d)
+                  
+                  <tr>
+                    <td>{{ $d['id'] }}</td>
+                    <td>{{ $d['name'] }}</td>
+                    <td>{{ $d['description'] }}</td>
+                    <td>{{ $d['status'] }}</td>
+                    <td><a href='{{ $d['document']}}'>SHOW PROPOSAL </a></td>
+                    <td><button><a href ="deleteprojectt/{{$d['id']}}">Delete</a></button></td>
+
+                  </tr>
+                  @endforeach
+                </table>
+                
+                
+                
+
+                
             </body>
             </html>

@@ -10,6 +10,10 @@
 <style>
 .navv{
     display: flex;
+  }
+table, th, td {
+  border: 1px solid black;
+  border-collapse : collapse;
 }
 </style>
 <body>
@@ -35,6 +39,16 @@
   <li class="nav-item">
     <a class="nav-link "href="Proposals">Proposals</a>
   </li>
+  <li class="nav-item">
+    <a class="nav-link "href="phase1">phase1</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link "href="phase2">phase2</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link "href="phase3">phase3</a>
+  </li>
+ 
 </ul>
                 <x-responsive-nav-link :href="route('profile.edit')">
                     {{ __('Profile') }}
@@ -50,74 +64,41 @@
                         {{ __('Log Out') }}
                     </x-responsive-nav-link>
                 </form>
-                </div>            
+                </div>
+                <p>your deadline for phase 1 is :</p>
+                @foreach ($dead as $d)
+                <h2>{{$d['submissiondate']}}</h2>
+                <h2>{{$d['submissiontime']}}</h2>
+                @endforeach
+                <form action="phase2dead" method="post">
+                    @csrf
+                    <input type="date" name="submissiondate" /><br />
+                    <input type="time" name="submissiontime" />
+                    <input type="submit" value="add deadline"/>
+                </form>
+                <table border="1">
+                  <tr>
+                    <td>ID</td>
+                    <td>description</td>
+                    <td>document</td>
+                    <td>Give marks</td>
+                    <td></td>
+                  </tr>
+                @foreach ($pros as $p)
+                <tr>
+                  <td>{{$p['id']}}</td>
+                  <td>{{$p['description']}}</td>
+                  <td><a href="{{$p['document']}}">Show Document</a></td>
+                  <td><form action="/givemarks2" method="post">
+                    @csrf
+                  <input type="hidden" name="pid" value="{{$p['id']}}" />
+                    <input type="number" name="marks" />
+                  </td>
+                  <td><input type="submit" value="Submit marks" /></td>
+                  </form>
+                </tr>
+                
+                @endforeach   
+                </table>            
             </body>
             </html>
-    <h1>Make Advisor</h1>
-    <form action="addadvisorsave" method ="POST">
-        @csrf
-        <table>
-            <tr>
-                <td><label>Name: </label></td>
-                <td><input type ="name" placeholder="Ahmed" name="name"/></td>
-            </tr>
-            <tr>
-                <td><label>Email: </label></td>
-                <td><input type ="email" placeholder="Ahmed@whatever.com" name="email"/></td>
-            </tr>
-            <tr>
-                <td><label>Password: </label></td>
-                <td><input type ="password" placeholder="********" name="password"/></td>
-            </tr>
-            <tr>
-                <td><label>Confirm Password: </label></td>
-                <td><input type ="password" placeholder="********" name="password1"/></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>
-                    <select name="roles">
-                    <option value="advsior">Advisor</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>
-                    <input type="submit" value="Make User"/>
-                </td>
-            </tr>
-            
-        </table>
-    </form>
-    <h1>Advisor</h1>
-    <table>
-        <tr>
-            <th>Name</th>
-            <th></th>
-            <th>Email</th>
-            <th></th>
-            <th>Roles</th>
-        </tr>
-    <?php
-    ?>
-    <tr>
-    <?php
-    foreach($data as $d)
-    {
-        ?>
-        <td>{{$d->name}}</td>
-        <td></td>
-        <td>{{$d->email}}</td>
-        <td></td>
-        <td>{{$d->roles}}</td>
-        <td><button><a href="deleteadvisor/{{$d->id}}">Delete</a></button></td>
-        </tr>
-        <?php
-
-    }
-
-    ?>
-    </table>
-</body>
-</html>

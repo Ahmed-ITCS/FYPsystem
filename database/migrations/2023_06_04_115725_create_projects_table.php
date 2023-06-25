@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('description');
             $table->string('document');
-            $table->string('status')->default('awaiting');
+            $table->string('status');
             $table->timestamps();
         });
     }

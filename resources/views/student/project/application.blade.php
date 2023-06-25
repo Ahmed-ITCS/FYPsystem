@@ -7,17 +7,20 @@
 
         <form method="POST" action="{{ route('student.project.application.store') }}" enctype="multipart/form-data">
             @csrf
-
             <div class="form-group">
-                <label for="proposal">Proposal</label>
-                <textarea id="proposal" name="proposal" class="form-control" required></textarea>
+                <label for="Name">Name</label>
+                <textarea id="name" name="name" class="form-control" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="description">Proposal</label>
+                <textarea id="description" name="description" class="form-control" required></textarea>
             </div>
 
             <!-- Add other form fields as needed -->
 
             <div class="form-group">
                 <label for="attachments">Attachments</label>
-                <input type="file" id="attachments" name="attachments[]" class="form-control" multiple>
+                <input type="file" id="attachments" name="file" class="form-control" multiple>
             </div>
 
             <button type="submit" class="btn btn-primary">Submit Application</button>

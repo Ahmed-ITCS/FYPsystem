@@ -10,6 +10,10 @@
 <style>
 .navv{
     display: flex;
+    
+}
+table, th, td {
+  border: 1px solid black;
 }
 </style>
 <body>
@@ -35,16 +39,7 @@
   <li class="nav-item">
     <a class="nav-link "href="Proposals">Proposals</a>
   </li>
-  <li class="nav-item">
-    <a class="nav-link "href="phase1">phase1</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link "href="phase2">phase2</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link "href="phase3">phase3</a>
-  </li>
- 
+  
 </ul>
                 <x-responsive-nav-link :href="route('profile.edit')">
                     {{ __('Profile') }}
@@ -60,6 +55,33 @@
                         {{ __('Log Out') }}
                     </x-responsive-nav-link>
                 </form>
-                </div>            
+                </div>
+                <table border='2'>
+                <tr>
+                    <th>ID</th>
+                    <th>Subject</th>
+                    <th>Complain</th>
+                    <th>AS</th>
+                    <th>Reply</th>
+                  </tr>
+                @foreach ($data as $d)
+                  
+                  <tr>
+                    <td>{{ $d['id'] }}</td>
+                    <td>{{ $d['subject'] }}</td>
+                    <td>{{ $d['description'] }}</td>
+                    <td>{{ $d['AS'] }}</td>
+                    <td><form method="get" action="/GiveFeedback"> <input type="text" name="feedback">
+                     <input type="hidden" name="id" value={{$d['id']}}    /></td>
+                    <td><input type="submit"  value="Give Feedback"/></form></td>
+
+                  </tr>
+                  @endforeach
+                </table>
+                
+                
+                
+
+                
             </body>
             </html>

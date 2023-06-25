@@ -12,7 +12,8 @@ class ComplaintController extends Controller
      */
     public function index()
     {
-        //
+        $data = Complaint::all()->where('AS','!=','Admin');
+        return view('admin.complains',compact('data'));
     }
 
     /**
@@ -29,17 +30,19 @@ class ComplaintController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
+            'AS' => 'required',
             'subject' => 'required',
             'description' => 'required',
         ]);
 
         $complaint = new Complaint();
         //$complaint->student_id = auth()->user()->id;
+        $complaint->AS = $validatedData['AS'];
         $complaint->subject = $validatedData['subject'];
         $complaint->description = $validatedData['description'];
         $complaint->save();
 
-        return redirect()->route('student.dashboard')->with('success', 'Complaint submitted successfully.');
+        return redirect()->back();
     }
 
     /**

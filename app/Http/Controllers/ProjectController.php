@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Project;
+use App\Models\project;
+use App\Models\ProjectApplication;
+
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -12,7 +14,8 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        //
+        $data = project::all();
+        return view('admin.projects',compact('data'));
     }
 
     public function showPhaseData($projectId)
@@ -40,9 +43,18 @@ class ProjectController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ProjectApplication $project)
     {
-        //
+        $attributes = $project->getAttributes();
+        $p = new Project;
+        echo $project->name;
+        $p->name = $project->name;
+        $p->description = $project->description;
+        $p->document = $project->document;
+        $p->status = 'approved';
+        $p->save();
+        //project::create($attributes);
+        //$this->destroy($project);
     }
 
     /**
@@ -72,8 +84,13 @@ class ProjectController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Project $project)
+    public function destroy($id)
     {
-        //
+        $project = project::where('id', $id)->get();
+        //echo $project[0]->id;
+        $project[0]->delete();
+        return redirect()->back();
+
+        //return view('admin.projects',compact('data'));
     }
 }
