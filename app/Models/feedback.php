@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class feedback extends Model
 {
     use HasFactory;
+    public function feedback()
+    {
+        return $this->belongsTo(Complaint::class);
+    }
 }

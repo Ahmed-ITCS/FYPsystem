@@ -14,7 +14,7 @@ class ProjectApplicationController extends Controller
      */
     public function index()
     {
-        $data = projectApplication::get();
+        $data = projectApplication::get()->where('status','=','awaiting');
         return view('admin.proposal',compact('data'));
         //
     }
@@ -82,7 +82,8 @@ class ProjectApplicationController extends Controller
         $p->document = $project[0]->document;
         $p->status = 'approved';
         $p->save();
-        $this->destroy($id);
+        ProjectApplication::where('id', $id)->update(['status'=>'approved']);
+        //$this->destroy($id);
     }
     /**
      * Update the specified resource in storage.

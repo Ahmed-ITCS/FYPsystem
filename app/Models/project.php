@@ -9,9 +9,9 @@ class Project extends Model
 {
     use HasFactory;
 
-    public function phases()
+    public function Project()
     {
-        return $this->hasMany(ProjectPhase::class);
+        return $this->hasOne(phase1::class);
     }
     
 }
