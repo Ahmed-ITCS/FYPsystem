@@ -16,6 +16,12 @@ class ComplaintController extends Controller
         return view('admin.complains',compact('data'));
     }
 
+    public function advisorIndex()
+    {
+        $data = Complaint::all()->where('AS','=','Advisor');
+        return view('advisor.complaints',compact('data'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */
