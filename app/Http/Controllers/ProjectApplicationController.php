@@ -48,12 +48,12 @@ class ProjectApplicationController extends Controller
         $filepath = "proposals/".$filename;
 
         $projectApplication = new ProjectApplication();
-        //$projectApplication->id = $project->id;
-        //$projectApplication->student_id = auth()->user()->id;
         $projectApplication->name = $validatedData['name'];
         $projectApplication->description = $validatedData['description'];
         $projectApplication->document = $filepath;
-        // Set other form inputs to the corresponding columns in the project_applications table
+        $advisorinfo = User::where('name', $request->advisor)->first();
+        $projectApplication->advisorID = $advisorinfo->id;
+
         $projectApplication->save();
         User::where('name', $request->advisor)->increment('projectalloted');
 
@@ -84,6 +84,8 @@ class ProjectApplicationController extends Controller
         $p->name = $project[0]->name;
         $p->description = $project[0]->description;
         $p->document = $project[0]->document;
+        $p->document = $project[0]->document;
+        $p->advisorID = $project[0]->advisorID;
         $p->status = 'approved';
         $p->save();
         ProjectApplication::where('id', $id)->update(['status'=>'approved']);
