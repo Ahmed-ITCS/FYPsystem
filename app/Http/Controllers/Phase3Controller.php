@@ -37,6 +37,12 @@ class Phase3Controller extends Controller
      */
     public function store(Request $request)
     {
+        $data = phase3::where('sid','=',auth()->user()->id)->first();
+        if($data)
+        {
+            echo "Hoi wi hai submission - niklo yaha se\n";
+            return ;
+        }
         $validatedData = $request->validate([
             'description' => 'required',
             'file' =>'required',

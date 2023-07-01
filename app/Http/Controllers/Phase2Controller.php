@@ -37,6 +37,12 @@ class Phase2Controller extends Controller
      */
     public function store(Request $request)
     {
+        $data = phase2::where('sid','=',auth()->user()->id)->first();
+        if($data)
+        {
+            echo "Hoi wi hai submission - niklo yaha se\n";
+            return ;
+        }
         $validatedData = $request->validate([
             'description' => 'required',
             'file' =>'required',
