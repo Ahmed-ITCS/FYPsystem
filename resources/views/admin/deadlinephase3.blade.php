@@ -34,9 +34,6 @@ table, th, td {
     <a class="nav-link "href="Projects">Projects</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link "href="complaint">Complaints</a>
-  </li>
-  <li class="nav-item">
     <a class="nav-link "href="Proposals">Proposals</a>
   </li>
   <li class="nav-item">
@@ -65,7 +62,7 @@ table, th, td {
                     </x-responsive-nav-link>
                 </form>
                 </div>
-                <p>your deadline for phase 1 is :</p>
+                <p>your deadline for phase 3 is :</p>
                 @foreach ($dead as $d)
                 <h2>{{$d['submissiondate']}}</h2>
                 <h2>{{$d['submissiontime']}}</h2>
@@ -84,20 +81,21 @@ table, th, td {
                     <td>Give marks</td>
                     <td></td>
                   </tr>
-                @foreach ($pros as $p)
+                  @foreach ($pros as $p)
                 <tr>
                   <td>{{$p['id']}}</td>
                   <td>{{$p['description']}}</td>
                   <td><a href="{{$p['document']}}">Show Document</a></td>
-                  <td><form action="/givemarks3" method="post">
+                  <td style="background-color:red">{{$p['marks']}}</td>
+                  <td><form action="givemarks1" method="post">
                     @csrf
-                    <input type="hidden" name="pid" value="{{$p['id']}}" />
+                  <input type="hidden" name="pid" value="{{$p['id']}}" />
                     <input type="number" name="marks" />
                   </td>
-                  <td><input type="submit" value="Submit markss" /></td>
+                  <td><input type="submit" value="Submit marks" /></td>
                   </form>
                 </tr>
-                @endforeach   
+                @endforeach      
                 </table>           
             </body>
             </html>

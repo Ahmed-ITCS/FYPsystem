@@ -15,6 +15,7 @@
                 <label for="description">Proposal</label>
                 <textarea id="description" name="description" class="form-control" required></textarea>
             </div>
+            
 
             <!-- Add other form fields as needed -->
 
@@ -22,6 +23,17 @@
                 <label for="attachments">Attachments</label>
                 <input type="file" id="attachments" name="file" class="form-control" multiple>
             </div>
+
+            <div class="form-group">
+                <label for="attachments">Advisor</label>
+                <select name="advisor">
+                    <option></option>
+                    @foreach($data as $d)
+                    <option value="{{$d['name']}}">{{$d['name']}}</option>
+                    @endforeach
+                </select>
+            </div>
+
 
             <button type="submit" class="btn btn-primary">Submit Application</button>
         </form>

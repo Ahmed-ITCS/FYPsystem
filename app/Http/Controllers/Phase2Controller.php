@@ -75,9 +75,13 @@ class Phase2Controller extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, phase2 $phase2)
+    public function update(Request $request)
     {
-        //
+        $marks = $request->marks;
+        $id = $request->pid;
+        phase2::where('id', $id)->update(['marks' => $marks]);
+        return redirect()->back();
+
     }
 
     /**
