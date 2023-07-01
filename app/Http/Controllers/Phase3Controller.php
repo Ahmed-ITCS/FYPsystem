@@ -20,6 +20,12 @@ class Phase3Controller extends Controller
      */
     public function create()
     {
+        $data = phase3::where('sid','=',auth()->user()->id)->first();
+        if($data)
+        {
+            echo "Hoi wi hai submission - niklo yaha se\n";
+            return ;
+        }
         $dead = deadlines::get()->where('id',3);
         //echo $dead[0]->submissiondate."  ".$dead[0]->submissiontime." ".date("h:i:00")."  ".date("Y-m-d");
         if($dead[2]->submissiondate > date("Y-m-d") && $dead[2]->submissiontime." ".date("h:i:00"))
@@ -37,12 +43,7 @@ class Phase3Controller extends Controller
      */
     public function store(Request $request)
     {
-        $data = phase3::where('sid','=',auth()->user()->id)->first();
-        if($data)
-        {
-            echo "Hoi wi hai submission - niklo yaha se\n";
-            return ;
-        }
+        
         $validatedData = $request->validate([
             'description' => 'required',
             'file' =>'required',

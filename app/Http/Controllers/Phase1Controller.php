@@ -23,6 +23,12 @@ class Phase1Controller extends Controller
      */
     public function create()
     {
+        $data = phase1::where('sid','=',auth()->user()->id)->first();
+        if($data)
+        {
+            echo "Hoi wi hai submission - niklo yaha se\n";
+            return ;
+        }
         $dead = deadlines::get()->where('id',1);
         
         //echo $dead[0]->submissiondate."  ".$dead[0]->submissiontime." ".date("h:i:00")."  ".date("Y-m-d");
@@ -41,12 +47,7 @@ class Phase1Controller extends Controller
      */
     public function store(Request $request)
     {
-        $data = phase1::where('sid','=',auth()->user()->id)->first();
-        if($data)
-        {
-            echo "Hoi wi hai submission - niklo yaha se\n";
-            return ;
-        }
+        
         $validatedData = $request->validate([
             'description' => 'required',
             'file' =>'required',
