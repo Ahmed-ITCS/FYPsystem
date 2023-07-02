@@ -1,5 +1,4 @@
 #!bin/bash
-mv .env.example .env
 composer update
 php artisan cache:clear
 php artisan view:clear
@@ -10,5 +9,4 @@ php artisan config:clear
 php artisan migrate:refresh
 composer dump-autoload
 php artisan key:generate
-npm install
 

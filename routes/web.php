@@ -16,9 +16,6 @@ use App\Http\Controllers\DeadlinesController;
 use App\Http\Controllers\Phase1Controller;
 use App\Http\Controllers\Phase2Controller;
 use App\Http\Controllers\Phase3Controller;
-use App\Http\Controllers\Grades1Controller;
-use App\Http\Controllers\Grades2Controller;
-use App\Http\Controllers\Grades3Controller;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -47,10 +44,10 @@ Route::get('/addadvisor', [Advisor::class , 'create'])->middleware(['auth', 'ver
 Route::post('/addadvisorsave', [Advisor::class , 'store'])->middleware(['auth', 'verified'])->middleware('role:admin')->name('dashboard');
 Route::get('/deleteadvisor/{user}', [Advisor::class , 'destroy'])->middleware(['auth', 'verified'])->middleware('role:admin')->name('dashboard');
 //admin complaints
-Route::get('/complaint', [ComplaintController::class , 'create'])->middleware(['auth', 'verified'])->middleware('role:admin')->name('dashboard');
-Route::get('/Complains', [ComplaintController::class , 'index'])->middleware(['auth', 'verified'])->middleware('role:admin')->name('dashboard');
-Route::get('/Complains', [ComplaintController::class , 'index'])->middleware(['auth', 'verified'])->middleware('role:admin')->name('dashboard');
-Route::get('/GiveFeedback', [FeedbackController::class , 'store'])->middleware(['auth', 'verified'])->middleware('role:admin')->name('dashboard');
+//Route::get('/complaint', [ComplaintController::class , 'create'])->middleware(['auth', 'verified'])->middleware('role:admin')->name('dashboard');
+//Route::get('/Complains', [ComplaintController::class , 'index'])->middleware(['auth', 'verified'])->middleware('role:admin')->name('dashboard');
+//Route::get('/Complains', [ComplaintController::class , 'index'])->middleware(['auth', 'verified'])->middleware('role:admin')->name('dashboard');
+//Route::get('/GiveFeedback', [FeedbackController::class , 'store'])->middleware(['auth', 'verified'])->middleware('role:admin')->name('dashboard');
 
 //admin projects
 Route::get('/Projects', [ProjectController::class , 'index'])->middleware(['auth', 'verified'])->middleware('role:admin');
@@ -69,9 +66,9 @@ Route::post('/phase1dead', [DeadlinesController::class,'store1'])->middleware(['
 Route::post('/phase2dead', [DeadlinesController::class,'store2'])->middleware(['auth', 'verified'])->middleware('role:admin');
 Route::post('/phase3dead', [DeadlinesController::class,'store3'])->middleware(['auth', 'verified'])->middleware('role:admin');
 //admin grading
-Route::post('/givemarks1', [Grades1Controller::class,'store'])->middleware(['auth', 'verified'])->middleware('role:admin');
-Route::post('/givemarks2', [Grades2Controller::class,'store'])->middleware(['auth', 'verified'])->middleware('role:admin');
-Route::post('/givemarks3', [Grades3Controller::class,'store'])->middleware(['auth', 'verified'])->middleware('role:admin');
+Route::post('/givemarks1', [Phase1Controller::class,'update'])->middleware(['auth', 'verified'])->middleware('role:admin');
+Route::post('/givemarks2', [Phase2Controller::class,'update'])->middleware(['auth', 'verified'])->middleware('role:admin');
+Route::post('/givemarks3', [Phase3Controller::class,'update'])->middleware(['auth', 'verified'])->middleware('role:admin');
 
 
 

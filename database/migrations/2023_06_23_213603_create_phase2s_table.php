@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreign('sid')->references('id')->on('users');
             $table->string('description');
             $table->string('document');
+            $table->integer('marks')->default(0);
             $table->timestamps();
         });
     }

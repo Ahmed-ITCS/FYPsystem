@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ProjectApplication;
 use App\Models\project;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 
@@ -24,7 +25,8 @@ class ProjectApplicationController extends Controller
      */
     public function create()
     {
-       return view('student.project.application');
+        $data = User::all()->where('roles','=','advsior')->where('projectalloted','<',4);
+       return view('student.project.application',compact('data'));
     }
 
 
@@ -36,6 +38,7 @@ class ProjectApplicationController extends Controller
         $validatedData = $request->validate([
             'description' => 'required',
             'name' =>'required',
+            'advisor'=>'required',
 
             // Add validation rules for other form inputs as needed
         ]);
@@ -45,13 +48,14 @@ class ProjectApplicationController extends Controller
         $filepath = "proposals/".$filename;
 
         $projectApplication = new ProjectApplication();
-        //$projectApplication->id = $project->id;
-        //$projectApplication->student_id = auth()->user()->id;
         $projectApplication->name = $validatedData['name'];
         $projectApplication->description = $validatedData['description'];
         $projectApplication->document = $filepath;
-        // Set other form inputs to the corresponding columns in the project_applications table
+        $advisorinfo = User::where('name', $request->advisor)->first();
+        $projectApplication->advisorID = $advisorinfo->id;
+
         $projectApplication->save();
+        User::where('name', $request->advisor)->increment('projectalloted');
 
         // Optionally, you can redirect the user to a confirmation page or another appropriate route
         return redirect()->route('student.dashboard')->with('success', 'Project application submitted successfully.');
@@ -80,6 +84,8 @@ class ProjectApplicationController extends Controller
         $p->name = $project[0]->name;
         $p->description = $project[0]->description;
         $p->document = $project[0]->document;
+        $p->document = $project[0]->document;
+        $p->advisorID = $project[0]->advisorID;
         $p->status = 'approved';
         $p->save();
         ProjectApplication::where('id', $id)->update(['status'=>'approved']);

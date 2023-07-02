@@ -20,6 +20,12 @@ class Phase2Controller extends Controller
      */
     public function create()
     {
+        $data = phase2::where('sid','=',auth()->user()->id)->first();
+        if($data)
+        {
+            echo "Hoi wi hai submission - niklo yaha se\n";
+            return ;
+        }
         $dead = deadlines::get()->where('id',2);
         //echo $dead[0]->submissiondate."  ".$dead[0]->submissiontime." ".date("h:i:00")."  ".date("Y-m-d");
         if($dead[1]->submissiondate > date("Y-m-d") && $dead[1]->submissiontime." ".date("h:i:00"))
@@ -37,6 +43,7 @@ class Phase2Controller extends Controller
      */
     public function store(Request $request)
     {
+        
         $validatedData = $request->validate([
             'description' => 'required',
             'file' =>'required',
@@ -75,9 +82,13 @@ class Phase2Controller extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, phase2 $phase2)
+    public function update(Request $request)
     {
-        //
+        $marks = $request->marks;
+        $id = $request->pid;
+        phase2::where('id', $id)->update(['marks' => $marks]);
+        return redirect()->back();
+
     }
 
     /**

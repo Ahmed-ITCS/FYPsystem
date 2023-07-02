@@ -6,6 +6,8 @@ use App\Models\phase1;
 use App\Models\deadlines;
 use Illuminate\Http\Request;
 
+use function PHPUnit\Framework\isEmpty;
+
 class Phase1Controller extends Controller
 {
     /**
@@ -21,6 +23,12 @@ class Phase1Controller extends Controller
      */
     public function create()
     {
+        $data = phase1::where('sid','=',auth()->user()->id)->first();
+        if($data)
+        {
+            echo "Hoi wi hai submission - niklo yaha se\n";
+            return ;
+        }
         $dead = deadlines::get()->where('id',1);
         
         //echo $dead[0]->submissiondate."  ".$dead[0]->submissiontime." ".date("h:i:00")."  ".date("Y-m-d");
@@ -39,6 +47,7 @@ class Phase1Controller extends Controller
      */
     public function store(Request $request)
     {
+        
         $validatedData = $request->validate([
             'description' => 'required',
             'file' =>'required',
@@ -74,9 +83,12 @@ class Phase1Controller extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, phase1 $phase1)
+    public function update(Request $request)
     {
-        //
+        $marks = $request->marks;
+        $id = $request->pid;
+        phase1::where('id', $id)->update(['marks' => $marks]);
+        return redirect()->back();
     }
 
     /**

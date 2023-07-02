@@ -34,9 +34,6 @@ table, th, td {
     <a class="nav-link "href="Projects">Projects</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link "href="complaint">Complaints</a>
-  </li>
-  <li class="nav-item">
     <a class="nav-link "href="Proposals">Proposals</a>
   </li>
   <li class="nav-item">
@@ -81,6 +78,7 @@ table, th, td {
                     <td>ID</td>
                     <td>description</td>
                     <td>document</td>
+                    <td>marks</td>
                     <td>Give marks</td>
                     <td></td>
                   </tr>
@@ -89,6 +87,7 @@ table, th, td {
                   <td>{{$p['id']}}</td>
                   <td>{{$p['description']}}</td>
                   <td><a href="{{$p['document']}}">Show Document</a></td>
+                  <td style="background-color:red">{{$p['marks']}}</td>
                   <td><form action="givemarks1" method="post">
                     @csrf
                   <input type="hidden" name="pid" value="{{$p['id']}}" />
