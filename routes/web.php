@@ -63,8 +63,11 @@ Route::get('phase1' , [DeadlinesController::class,'create1'])->middleware(['auth
 Route::get('/phase2' , [DeadlinesController::class,'create2'])->middleware(['auth', 'verified'])->middleware('role:admin');
 Route::get('/phase3' , [DeadlinesController::class,'create3'])->middleware(['auth', 'verified'])->middleware('role:admin');
 Route::post('/phase1dead', [DeadlinesController::class,'store1'])->middleware(['auth', 'verified'])->middleware('role:admin');
+Route::post('/phase1start', [DeadlinesController::class,'start1'])->middleware(['auth', 'verified'])->middleware('role:admin');
 Route::post('/phase2dead', [DeadlinesController::class,'store2'])->middleware(['auth', 'verified'])->middleware('role:admin');
+Route::post('/phase2start', [DeadlinesController::class,'start2'])->middleware(['auth', 'verified'])->middleware('role:admin');
 Route::post('/phase3dead', [DeadlinesController::class,'store3'])->middleware(['auth', 'verified'])->middleware('role:admin');
+Route::post('/phase3start', [DeadlinesController::class,'start3'])->middleware(['auth', 'verified'])->middleware('role:admin');
 //admin grading
 Route::post('/givemarks1', [Phase1Controller::class,'update'])->middleware(['auth', 'verified'])->middleware('role:admin');
 Route::post('/givemarks2', [Phase2Controller::class,'update'])->middleware(['auth', 'verified'])->middleware('role:admin');

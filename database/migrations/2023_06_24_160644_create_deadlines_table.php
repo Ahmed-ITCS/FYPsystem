@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('deadlines', function (Blueprint $table) {
             $table->id();
-            $table->date("submissiondate");
-            $table->time("submissiontime");
+            $table->date("submissiondate")->default(NULL);
+            $table->time("submissiontime")->default(NULL);
+            $table->date("startingdate");
             $table->timestamps();
         });
     }
