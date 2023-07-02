@@ -62,6 +62,15 @@ table, th, td {
                     </x-responsive-nav-link>
                 </form>
                 </div>
+                <p>your start date is </p>
+                @foreach ($start as $d)
+                <h2>{{$d['startingdate']}}</h2>
+                @endforeach
+                <form action="phase2start" method="post">
+                    @csrf
+                    <input type="date" name="startingdate" />
+                    <input type="submit" value="add starting date"/>
+                </form>
                 <p>your deadline for phase 2 is :</p>
                 @foreach ($dead as $d)
                 <h2>{{$d['submissiondate']}}</h2>
