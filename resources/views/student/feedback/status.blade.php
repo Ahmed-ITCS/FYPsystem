@@ -1,11 +1,8 @@
 <div class="dashboard-actions">
             <a href="{{ route('student.project.application.create') }}" class="btn btn-primary">Apply for Projects</a>
             <a href="{{ route('student.feedback.status') }}" class="btn btn-primary">View Feedback</a>
-            <a href="{{ route('student.complaint.submit') }}" class="btn btn-primary">Submit Complaint</a>
-            <a href="{{ route('student.project.upload', 1) }}" class="btn btn-primary">Upload Project Document</a>
-            <a href="/studentphase1" class="btn btn-primary">phase1</a>
-            <a href="/studentphase2" class="btn btn-primary">phase2</a>
-            <a href="/studentphase3" class="btn btn-primary">phase3</a>
+            <a href="{{ route('student.project.upload') }}" class="btn btn-primary">Upload Project Document</a>
+            
              <!-- Authentication -->
              <form method="POST" action="{{ route('logout') }}">
                     @csrf

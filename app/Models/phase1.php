@@ -8,5 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class phase1 extends Model
 {
     use HasFactory;
-    
+
+    public function deadline()
+    {
+        return $this->hasOne(deadlines::class);
+    }
+
 }

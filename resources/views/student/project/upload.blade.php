@@ -1,34 +1,24 @@
+<div class="dashboard-actions">
+            <a href="{{ route('student.project.application.create') }}" class="btn btn-primary">Apply for Projects</a>
+            <a href="{{ route('student.feedback.status') }}" class="btn btn-primary">View Feedback</a>
+            <a href="{{ route('student.project.upload') }}" class="btn btn-primary">Upload Project Document</a>
+             <!-- Authentication -->
+             <form method="POST" action="{{ route('logout') }}">
+                    @csrf
 
-@foreach ($phases as $phase)
-    
-    
-    @if ($phase->hasStarted())
-        <h3>{{ $phase->name }}</h3>
-        <p>{{ $phase->description }}</p>
-        <p>Start Date: {{ $phase->start_date }}</p>
-        <p>End Date: {{ $phase->end_date }}</p>
-         Display phase data submission
-        <form action="{{ route('student.project.upload.store', $phase) }}" method="POST">
-            Form fields for data submission
-            @csrf
+                    <x-responsive-nav-link :href="route('logout')"
+                            onclick="event.preventDefault();
+                                        this.closest('form').submit();">
+                        {{ __('Log Out') }}
+                    </x-responsive-nav-link>
+                </form>
+        </div>
 
-            <div class="form-group">
-                <label for="proposal">Proposal</label>
-                <textarea id="proposal" name="proposal" class="form-control" required></textarea>
-            </div>
 
-            
+        <br><br><br>
 
-            <div class="form-group">
-                <label for="attachments">Attachments</label>
-                <input type="file" id="attachments" name="attachments[]" class="form-control" multiple>
-            </div>
-
-            <button type="submit" class="btn btn-primary">Submit Application</button>
-        </form>
-    @else
-        <h3>{{ $phase->name }}</h3>
-         <p>Phase has not started yet.</p> 
-    @endif
-@endforeach
-
+        <a href="/studentphase1/1" class="btn btn-primary">phase1</a>
+        <hr>
+        <a href="/studentphase2/2" class="btn btn-primary">phase2</a>
+        <hr>
+        <a href="/studentphase3/3" class="btn btn-primary">phase3</a>

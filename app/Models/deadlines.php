@@ -8,6 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class deadlines extends Model
 {
     use HasFactory;
-    protected $fillable = ['submissiondate','submissiontime'];
+    protected $fillable = ['submissiondate','submissiontime', 'startingdate'];
+
+    public function hasStarted()
+    {
+        return now()->startOfDay() >= $this->startingdate;
+    }
     
+    public function phase1()
+    {
+        return $this->belongsTo(deadlines::class, 'id');
+    }
 }

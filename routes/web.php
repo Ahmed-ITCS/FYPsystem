@@ -96,15 +96,13 @@ Route::post('/projects/apply', [ProjectApplicationController::class, 'store'])->
 
 Route::get('/feedback/status', [ProjectApplicationController::class, 'status'])->middleware(['auth', 'verified'])->middleware('role:student')->name('student.feedback.status');
 
-Route::get('/complaints/create', [ComplaintController::class, 'create'])->middleware(['auth', 'verified'])->middleware('role:student')->name('student.complaint.submit');
-Route::post('/complaints', [ComplaintController::class, 'store'])->middleware(['auth', 'verified'])->name('student.complaints.store');
-
-Route::get('/projects/upload/{project}', [ProjectPhaseController::class, 'create'])->middleware(['auth', 'verified'])->middleware('role:student')->name('student.project.upload');
-Route::post('/projects/upload/{project}', [ProjectPhaseDataController::class, 'store'])->middleware(['auth', 'verified'])->middleware('role:student')->name('student.project.upload.store');
-//student phases
-Route::get('/studentphase1',[Phase1Controller::class,'create'])->middleware(['auth', 'verified'])->middleware('role:student');
-Route::get('/studentphase2',[Phase2Controller::class,'create'])->middleware(['auth', 'verified'])->middleware('role:student');
-Route::get('/studentphase3',[Phase3Controller::class,'create'])->middleware(['auth', 'verified'])->middleware('role:student');
+Route::get('/projects/upload', [ProjectPhaseController::class, 'create'])->middleware(['auth', 'verified'])->middleware('role:student')->name('student.project.upload');
+Route::get('/upload-document', function () {
+    return view('student.project.upload');
+})->middleware(['auth', 'verified'])->middleware('role:student')->name('student.project.upload');
+Route::get('/studentphase1/{id}',[Phase1Controller::class,'create'])->middleware(['auth', 'verified'])->middleware('role:student');
+Route::get('/studentphase2/{id}',[Phase2Controller::class,'create'])->middleware(['auth', 'verified'])->middleware('role:student');
+Route::get('/studentphase3/{id}',[Phase3Controller::class,'create'])->middleware(['auth', 'verified'])->middleware('role:student');
 Route::post('/phase1save',[Phase1Controller::class,'store'])->middleware(['auth', 'verified'])->middleware('role:student');
 Route::post('/phase2save',[Phase2Controller::class,'store'])->middleware(['auth', 'verified'])->middleware('role:student');
 Route::post('/phase3save',[Phase3Controller::class,'store'])->middleware(['auth', 'verified'])->middleware('role:student');

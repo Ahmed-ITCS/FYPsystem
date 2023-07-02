@@ -21,7 +21,7 @@ class Phase1Controller extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($id)
     {
         $data = phase1::where('sid','=',auth()->user()->id)->first();
         if($data)
@@ -30,14 +30,24 @@ class Phase1Controller extends Controller
             return ;
         }
         $dead = deadlines::get()->where('id',1);
-        
-        //echo $dead[0]->submissiondate."  ".$dead[0]->submissiontime." ".date("h:i:00")."  ".date("Y-m-d");
-        if($dead[0]->submissiondate > date("Y-m-d") && $dead[0]->submissiontime." ".date("h:i:00"))
+        $projectid = project::where('sid',auth()->user()->id)->first();
+        if(!$projectid)
         {
-            return view('student.project.phase1');
+            echo"your proposal still in awaiting yet\n";
+            return;
         }
+        else if(empty($dead))
+        {
+            echo "Submission is not created yet\n";
+            return;
+        }
+        else if($dead[0]->submissiondate > date("Y-m-d") && $dead[0]->submissiontime." ".date("h:i:00"))
+        {
+            return view('student.project.phase1',['id'=>$id]);
+        } 
         else{
             echo "Submission time expired\n";
+            return;
         }
         
     }

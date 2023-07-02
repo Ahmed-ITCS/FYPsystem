@@ -5,6 +5,7 @@ use App\Models\project;
 use App\Models\deadlines;
 use App\Models\phase2;
 use Illuminate\Http\Request;
+use function PHPUnit\Framework\isEmpty;
 
 class Phase2Controller extends Controller
 {
@@ -28,6 +29,12 @@ class Phase2Controller extends Controller
             return ;
         }
         $dead = deadlines::get()->where('id',2);
+        $projectid = project::where('sid',auth()->user()->id)->first();
+        if(!$projectid)
+        {
+            echo"your proposal still in awaiting yet\n";
+            return;
+        }
         //echo $dead[0]->submissiondate."  ".$dead[0]->submissiontime." ".date("h:i:00")."  ".date("Y-m-d");
         if($dead[1]->submissiondate > date("Y-m-d") && $dead[1]->submissiontime." ".date("h:i:00"))
         {
