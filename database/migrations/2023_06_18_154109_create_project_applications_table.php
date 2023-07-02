@@ -16,7 +16,9 @@ return new class extends Migration
             $table->string('name');
             $table->string('description');
             $table->string('document');
-            $table->string("status")->default('awaiting');
+            $table->string("status")->default('awaiting'); 
+            $table->unsignedBigInteger("sid"); // Use unsignedBigInteger for foreign keys
+            $table->foreign('sid')->references('id')->on('users');
             $table->unsignedBigInteger('advisorID');
             $table->foreign('advisorID')->references('id')->on('users');
             $table->timestamps();
