@@ -25,7 +25,7 @@ class ProjectApplicationController extends Controller
      */
     public function create()
     {
-        $data = User::all()->where('roles','=','advsior')->where('projectalloted','<',4);
+        $data = User::all()->where('roles','=','advisor')->where('projectalloted','<',4);
        return view('student.project.application',compact('data'));
     }
 
