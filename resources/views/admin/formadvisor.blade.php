@@ -83,7 +83,7 @@
                 <td></td>
                 <td>
                     <select name="roles">
-                    <option value="advsior">Advisor</option>
+                    <option value="advisor">Advisor</option>
                     </select>
                 </td>
             </tr>

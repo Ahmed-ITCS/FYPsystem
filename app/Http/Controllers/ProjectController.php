@@ -18,6 +18,13 @@ class ProjectController extends Controller
         return view('admin.projects',compact('data'));
     }
 
+    public function advisorIndex()
+    {
+        //there are no prjects associated with the advisor so i am simply getting all projects
+        $data = project::all();
+        return view('advisor.projects',compact('data'));
+    }
+
     public function showPhaseData($projectId)
     {
         $project = Project::with('phases.phaseData')->find($projectId);

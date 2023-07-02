@@ -105,10 +105,17 @@ Route::get('/studentphase3',[Phase3Controller::class,'create'])->middleware(['au
 Route::post('/phase1save',[Phase1Controller::class,'store'])->middleware(['auth', 'verified'])->middleware('role:student');
 Route::post('/phase2save',[Phase2Controller::class,'store'])->middleware(['auth', 'verified'])->middleware('role:student');
 Route::post('/phase3save',[Phase3Controller::class,'store'])->middleware(['auth', 'verified'])->middleware('role:student');
-
-
-
-
 /* Student Module End */
+
+/* Advisor routes */
+
+Route::get('/dashboard-advisor', function () {
+    return view('advisor/dashboard');
+})->middleware(['auth', 'verified'])->middleware('role:advisor')->name('dashboard');
+
+Route::get('/projects-advisor', [ProjectController::class , 'advisorIndex'])->middleware(['auth', 'verified'])->middleware('role:advisor');
+Route::get('/complaints-advisor', [ComplaintController::class , 'advisorIndex'])->middleware(['auth', 'verified'])->middleware('role:advisor');
+
+
 
 require __DIR__.'/auth.php';
