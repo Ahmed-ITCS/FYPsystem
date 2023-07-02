@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('status');
             $table->unsignedBigInteger('advisorID');
             $table->foreign('advisorID')->references('id')->on('users');
+            $table->unsignedBigInteger("sid"); // Use unsignedBigInteger for foreign keys
+            $table->foreign('sid')->references('id')->on('users');
             $table->timestamps();
         });
     }

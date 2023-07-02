@@ -26,19 +26,22 @@ class DeadlinesController extends Controller
         //echo"hello";
         $pros=phase1::all();
         $dead = deadlines::where('id',1)->get();
-        return view('admin.deadlinephase1',compact('dead','pros'));
+        $start = deadlines::where('id',1)->get();
+        return view('admin.deadlinephase1',compact('dead','pros','start'));
     }
     public function create2()
     {
         $pros=phase2::all();
         $dead = deadlines::where('id',2)->get();
-        return view('admin.deadlinephase2',compact('dead','pros'));
+        $start = deadlines::where('id',2)->get();
+        return view('admin.deadlinephase2',compact('dead','pros','start'));
     }
     public function create3()
     {
         $pros=phase3::all();
         $dead = deadlines::where('id',3)->get();
-        return view('admin.deadlinephase3',compact('dead','pros'));
+        $start = deadlines::where('id',3)->get();
+        return view('admin.deadlinephase3',compact('dead','pros','start'));
     }
 
     /**
@@ -61,6 +64,23 @@ class DeadlinesController extends Controller
              echo "deadline created\n";
         }
     }
+    public function start1(Request $request)
+    {
+        $data = $request->validate([
+        "startingdate" => "required",
+        ]);
+        $check = deadlines::find(1);
+        if ($check) {
+            $check->update($data);
+            echo "startdate existed\nso it got updated";
+        } else {
+            $deadline = new deadlines();
+            $deadline->startingdate = $request->startingdate;
+            $deadline->save();
+
+            echo "start date created\n";
+        }
+    }
     public function store2(Request $request)
     {
         $data = $request->validate([
@@ -78,6 +98,25 @@ class DeadlinesController extends Controller
              echo "deadline created\n";
         }
     }
+
+    public function start2(Request $request)
+    {
+        $data = $request->validate([
+        "startingdate" => "required",
+        ]);
+        $check = deadlines::find(2);
+        if ($check) {
+            $check->update($data);
+            echo "startdate existed\nso it got updated";
+        } else {
+            $deadline = new deadlines();
+            $deadline->startingdate = $request->startingdate;
+            $deadline->save();
+
+            echo "start date created\n";
+        }
+    }
+
     public function store3(Request $request)
     {
         $data = $request->validate([
@@ -93,6 +132,23 @@ class DeadlinesController extends Controller
         } else {
              deadlines::create($data);
              echo "deadline created\n";
+        }
+    }
+    public function start3(Request $request)
+    {
+        $data = $request->validate([
+        "startingdate" => "required",
+        ]);
+        $check = deadlines::find(3);
+        if ($check) {
+            $check->update($data);
+            echo "startdate existed\nso it got updated";
+        } else {
+            $deadline = new deadlines();
+            $deadline->startingdate = $request->startingdate;
+            $deadline->save();
+
+            echo "start date created\n";
         }
     }
 

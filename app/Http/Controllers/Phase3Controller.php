@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\project;
 use App\Models\deadlines;
 use App\Models\phase3;
 use Illuminate\Http\Request;
@@ -54,6 +55,8 @@ class Phase3Controller extends Controller
         $filepath = "phasee3/".$filename;
         $user = auth()->user();
         $p1 = new phase3();
+        $projectdata = project::where('sid',$user->id)->first();
+        $p1->pid = $projectdata->id;
         $p1->sid = $user->id;
         $p1->description = $validatedData['description'];
         $p1->document = $filepath;

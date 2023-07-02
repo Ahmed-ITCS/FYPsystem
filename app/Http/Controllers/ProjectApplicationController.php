@@ -20,12 +20,19 @@ class ProjectApplicationController extends Controller
         //
     }
 
+    public function status()
+    {
+        $data = projectApplication::get()->where('sid','=',auth()->user()->id);
+        return view('student.feedback.status',compact('data'));
+        //
+    }
+
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        $data = User::all()->where('roles','=','advsior')->where('projectalloted','<',4);
+        $data = User::all()->where('roles','=','advisor')->where('projectalloted','<',4);
        return view('student.project.application',compact('data'));
     }
 
@@ -51,6 +58,7 @@ class ProjectApplicationController extends Controller
         $projectApplication->name = $validatedData['name'];
         $projectApplication->description = $validatedData['description'];
         $projectApplication->document = $filepath;
+        $projectApplication->sid = auth()->user()->id;
         $advisorinfo = User::where('name', $request->advisor)->first();
         $projectApplication->advisorID = $advisorinfo->id;
 

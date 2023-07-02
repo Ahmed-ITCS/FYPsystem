@@ -94,7 +94,7 @@ Route::get('/dashboard-student', [StudentDashboardController::class, 'index'])->
 Route::get('/projects/apply', [ProjectApplicationController::class, 'create'])->middleware(['auth', 'verified'])->middleware('role:student')->name('student.project.application.create');
 Route::post('/projects/apply', [ProjectApplicationController::class, 'store'])->middleware(['auth', 'verified'])->middleware('role:student')->name('student.project.application.store');
 
-Route::get('/feedback/status', [ProjectApplicationController::class, 'index'])->middleware(['auth', 'verified'])->middleware('role:student')->name('student.feedback.status');
+Route::get('/feedback/status', [ProjectApplicationController::class, 'status'])->middleware(['auth', 'verified'])->middleware('role:student')->name('student.feedback.status');
 
 Route::get('/complaints/create', [ComplaintController::class, 'create'])->middleware(['auth', 'verified'])->middleware('role:student')->name('student.complaint.submit');
 Route::post('/complaints', [ComplaintController::class, 'store'])->middleware(['auth', 'verified'])->name('student.complaints.store');

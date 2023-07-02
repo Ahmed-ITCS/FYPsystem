@@ -50,7 +50,7 @@ class advisor extends Controller
     }
     public function alll()
     {
-        $data = User::all()->where('roles','=','advsior');
+        $data = User::all()->where('roles','=','advisor');
         return $data;
     }
     /**

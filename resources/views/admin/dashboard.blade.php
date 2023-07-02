@@ -30,7 +30,7 @@
     <a class="nav-link "href="Projects">Projects</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link "href="Proposals">Proposals</a>
+    <a class="nav-link "href="/Proposals">Proposals</a>
   </li>
   <li class="nav-item">
     <a class="nav-link "href="phase1">phase1</a>

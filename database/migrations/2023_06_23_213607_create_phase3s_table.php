@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger("sid"); // Use unsignedBigInteger for foreign keys
             $table->foreign('sid')->references('id')->on('users');
+            $table->unsignedBigInteger("pid"); // Use unsignedBigInteger for foreign keys
+            $table->foreign('pid')->references('id')->on('projects');
             $table->string('description');
             $table->string('document');
             $table->integer('marks')->default(0);

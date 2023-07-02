@@ -58,6 +58,7 @@ class ProjectController extends Controller
         $p->name = $project->name;
         $p->description = $project->description;
         $p->document = $project->document;
+        $p->sid = $project->sid;
         $p->status = 'approved';
         $p->save();
         //project::create($attributes);
