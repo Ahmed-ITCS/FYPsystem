@@ -32,8 +32,17 @@ class ProjectApplicationController extends Controller
      */
     public function create()
     {
-        $data = User::all()->where('roles','=','advisor')->where('projectalloted','<',4);
-       return view('student.project.application',compact('data'));
+        $proposal = ProjectApplication::get()->where('sid','=',auth()->user()->id);
+        //echo "Proposal id = " . $proposal;
+        if (count($proposal) === 0) {
+            $data = User::all()->where('roles','=','advisor')->where('projectalloted','<',4);
+            return view('student.project.application',compact('data'));
+        } else {
+            echo "Propsal is already submitted\n";
+            return ;
+        }
+        
+        
     }
 
 

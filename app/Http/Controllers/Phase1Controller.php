@@ -6,8 +6,6 @@ use App\Models\phase1;
 use App\Models\deadlines;
 use Illuminate\Http\Request;
 
-use function PHPUnit\Framework\isEmpty;
-
 class Phase1Controller extends Controller
 {
     /**
