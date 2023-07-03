@@ -8,5 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class phase3 extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'description',
+        'document'
+    ];
+
+    public function deadlines()
+    {
+        return $this->hasOne(deadlines::class)->where('id', 3);
+    }
     
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\project;
 use App\Models\phase1;
 use App\Models\deadlines;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class Phase1Controller extends Controller
@@ -29,17 +30,23 @@ class Phase1Controller extends Controller
         }
         $dead = deadlines::get()->where('id',1);
         $projectid = project::where('sid',auth()->user()->id)->first();
+        $currentDate = Carbon::now()->toDateString();
         if(!$projectid)
         {
             echo"your proposal still in awaiting yet\n";
             return;
         }
-        else if(empty($dead))
+        else if(count($dead) === 0)
         {
             echo "Submission is not created yet\n";
             return;
         }
-        else if($dead[0]->submissiondate > date("Y-m-d") && $dead[0]->submissiontime." ".date("h:i:00"))
+        else if ($dead[0]->startingdate > $currentDate)
+        {
+            echo "Submission Time is not started yet\n";
+            return;
+        }
+        else if($dead[0]->submissiondate >= date("Y-m-d") && $dead[0]->submissiontime." ".date("h:i:00"))
         {
             return view('student.project.phase1',['id'=>$id]);
         } 

@@ -5,6 +5,7 @@ use App\Models\project;
 use App\Models\deadlines;
 use App\Models\phase3;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use function PHPUnit\Framework\isEmpty;
 
 class Phase3Controller extends Controller
@@ -20,7 +21,7 @@ class Phase3Controller extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($id)
     {
         $data = phase3::where('sid','=',auth()->user()->id)->first();
         if($data)
@@ -30,18 +31,29 @@ class Phase3Controller extends Controller
         }
         $dead = deadlines::get()->where('id',3);
         $projectid = project::where('sid',auth()->user()->id)->first();
+        $currentDate = Carbon::now()->toDateString();
         if(!$projectid)
         {
             echo"your proposal still in awaiting yet\n";
             return;
         }
-        //echo $dead[0]->submissiondate."  ".$dead[0]->submissiontime." ".date("h:i:00")."  ".date("Y-m-d");
-        if($dead[2]->submissiondate > date("Y-m-d") && $dead[2]->submissiontime." ".date("h:i:00"))
+        else if(count($dead) === 0)
         {
-            return view('student.project.phase3');
+            echo "Submission is not created yet\n";
+            return;
         }
+        else if ($dead[1]->startingdate > $currentDate)
+        {
+            echo "Submission Time is not started yet\n";
+            return;
+        }
+        else if($dead[1]->submissiondate >= date("Y-m-d") && $dead[1]->submissiontime." ".date("h:i:00"))
+        {
+            return view('student.project.phase2',['id'=>$id]);
+        } 
         else{
             echo "Submission time expired\n";
+            return;
         }
         
     }

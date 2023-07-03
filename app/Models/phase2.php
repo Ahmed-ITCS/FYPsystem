@@ -9,4 +9,13 @@ class phase2 extends Model
 {
     use HasFactory;
     
+    protected $fillable = [
+        'description',
+        'document'
+    ];
+
+    public function deadlines()
+    {
+        return $this->hasOne(deadlines::class)->where('id', 2);
+    }
 }
